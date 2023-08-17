@@ -1,21 +1,31 @@
 export interface Task {
-  taskId: string;
-  taskName?: string;
-  isDone?: boolean;
+  id: string;
+  name: string;
+  day: Date;
+  isDone: boolean;
 }
 
-export interface JournalState {
+export interface Track {
+  id: string;
+  name: string;
+  startDate: Date;
+  finalDate?: Date;
+}
+
+export type JournalState = {
   tasks: Task[];
-  // dispatch: React.Dispatch<JournalAction>;
+  tracks: Track[];
 }
 
-export enum JournalTaskActionKind {
+export type Action = {
+  type: string;
+  payload?: any;
+}
+
+export enum ActionKind {
   ADD = 'ADD',
   DELETE = 'DELETE',
   UPDATE = 'UPDATE',
 }
 
-export interface JournalAction {
-  type: JournalTaskActionKind,
-  payload?: Task | Partial<Task>
-}
+export type JournalReducer = (state: JournalState, action: Action) => JournalState;

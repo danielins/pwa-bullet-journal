@@ -4,14 +4,18 @@ import { JournalContext } from "src/hooks/useJournalContext";
 import { Task } from "src/@types";
 
 export default function TaskList() {
-  const { tasks } = useContext(JournalContext);
+  const {
+    state: { tasks },
+  } = useContext(JournalContext);
+
+  console.log("LIST", tasks);
 
   return (
     <>
       <p>Tarefas a serem feitas: {tasks.length}</p>
       <ul>
         {tasks.map((task: Task) => (
-          <TaskItem {...task} key={task.taskId} />
+          <TaskItem {...task} key={task.id} />
         ))}
       </ul>
     </>

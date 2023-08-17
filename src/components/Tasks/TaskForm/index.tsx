@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { JournalContext } from "src/hooks/useJournalContext";
-import { JournalTaskActionKind } from "src/@types";
+import { ActionKind } from "src/@types";
 
 export default function TaskForm() {
   const [newTask, setNewTask] = useState<string>("");
@@ -8,8 +8,11 @@ export default function TaskForm() {
 
   function addNewTask() {
     dispatch({
-      type: JournalTaskActionKind.ADD,
-      payload: newTask,
+      type: ActionKind.ADD,
+      payload: {
+        id: +new Date(),
+        name: newTask,
+      },
     });
     setNewTask("");
   }

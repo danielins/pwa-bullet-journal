@@ -1,47 +1,24 @@
-import { JournalAction, JournalState, JournalTaskActionKind } from "src/@types";
-import { useReducer, createContext } from "react";
+import { Action, JournalState } from "src/@types";
+import { useJournalReducer } from "./useJournalReducer";
+import { createContext } from "react";
+import { INITIAL_STATE } from "src/reducers";
 
-const INITIAL_STATE: JournalState = {
-  tasks: [],
-};
-
-//dev.to/elisealcala/react-context-with-usereducer-and-typescript-4obm
-
-function journalStateReducer(
-  state: JournalState,
-  action: JournalAction
-): JournalState {
-  console.log("reducer", state, action);
-  switch (action.type) {
-    case JournalTaskActionKind.ADD:
-      return {
-        tasks: [
-          ...state.tasks,
-          {
-            taskId: `${new Date().valueOf()}`,
-            taskName: action.payload,
-            isDone: false,
-          },
-        ],
-      };
-    default:
-      return state;
-  }
-}
+// dev.to/elisealcala/react-context-with-usereducer-and-typescript-4obm
+// https://www.npmjs.com/package/react-combine-reducers
 
 const JournalContext = createContext<{
   state: JournalState;
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<Action>;
 }>({
   state: INITIAL_STATE,
   dispatch: () => null,
 });
 
 const JournalContextProvider: React.FC<any> = ({ children }) => {
-  const [state, dispatch] = useReducer(journalStateReducer, INITIAL_STATE);
+  const [state, dispatch] = useJournalReducer();
 
   return (
-    <JournalContext.Provider value={{ ...state, dispatch }}>
+    <JournalContext.Provider value={{ state, dispatch }}>
       {children}
     </JournalContext.Provider>
   );
