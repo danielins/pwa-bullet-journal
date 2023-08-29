@@ -8,8 +8,6 @@ export default function TaskList() {
     state: { tasks },
   } = useContext(JournalContext);
 
-  console.log("LIST", tasks);
-
   return (
     <>
       <p>Tarefas a serem feitas: {tasks.length}</p>

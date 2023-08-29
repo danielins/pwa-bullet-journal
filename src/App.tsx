@@ -1,5 +1,6 @@
 import TaskForm from "./components/Tasks/TaskForm";
 import TaskList from "./components/Tasks/TaskList";
+import Calendar from "./components/Calendar";
 import { JournalContextProvider } from "./hooks/useJournalContext";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <JournalContextProvider>
       <TaskForm />
       <TaskList />
+      <Calendar />
     </JournalContextProvider>
   );
 }
