@@ -5,7 +5,7 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 dayjs.extend(weekday);
 dayjs.extend(weekOfYear);
 
-export type CalendarDay = {
+export interface ICalendarDay {
   dateString: string;
   dayOfMonth: number;
   isCurrentMonth: boolean;
@@ -25,7 +25,7 @@ export function getNumberOfDaysInMonth(year: number, month: number): number {
   return dayjs(`${year}-${month}-01`).daysInMonth();
 }
 
-export function createDaysForCurrentMonth(year: number, month: number): CalendarDay[] {
+export function createDaysForCurrentMonth(year: number, month: number): ICalendarDay[] {
   return [...Array(getNumberOfDaysInMonth(year, month))].map((_, index) => {
     return {
       dateString: dayjs(`${year}-${month}-${index + 1}`).format('YYYY-MM-DD'),
@@ -35,7 +35,7 @@ export function createDaysForCurrentMonth(year: number, month: number): Calendar
   })
 }
 
-export function createDaysForPreviousMonth(year: number, month: number, currentMonthDays: CalendarDay[]): CalendarDay[] {
+export function createDaysForPreviousMonth(year: number, month: number, currentMonthDays: ICalendarDay[]): ICalendarDay[] {
   const weekdayFirstDayOfMonth: number = _getWeekDay(currentMonthDays[0].dateString);
   const previousMonth = dayjs(`${year}-${month}-01`).subtract(1, 'month');
   const visibleNumberOfDaysFromPreviousMonth = weekdayFirstDayOfMonth;
@@ -56,7 +56,7 @@ export function createDaysForPreviousMonth(year: number, month: number, currentM
   })
 }
 
-export function createDaysForNextMonth(year: number, month: number, currentMonthDays: CalendarDay[]): CalendarDay[] {
+export function createDaysForNextMonth(year: number, month: number, currentMonthDays: ICalendarDay[]): ICalendarDay[] {
   const weekdayLastDayOfMonth: number = _getWeekDay(`${year}-${month}-${currentMonthDays.length}`);
   const nextMonth = dayjs(`${year}-${month}-01`).add(1, 'month');
   const visibleNumberOfDaysFromNextMonth = 6 - weekdayLastDayOfMonth;

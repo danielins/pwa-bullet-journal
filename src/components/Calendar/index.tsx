@@ -1,16 +1,20 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import {
-  CalendarDay,
+  ICalendarDay,
   createDaysForCurrentMonth,
   createDaysForNextMonth,
   createDaysForPreviousMonth,
 } from "src/helpers/calendar";
+import { CalendarGrid } from "./CalendarGrid";
+import { CalendarDay } from "./CalendarDay";
+
+import * as S from "./styles";
 
 export default function Calendar() {
   // https://engineering.deptagency.com/how-to-build-a-full-page-calendar-with-react
 
-  const [calendarDays, setCalendarDays] = useState<CalendarDay[]>([]);
+  const [calendarDays, setCalendarDays] = useState<ICalendarDay[]>([]);
 
   useEffect(() => {
     const currentYear = dayjs().year();
@@ -35,13 +39,15 @@ export default function Calendar() {
   }, []);
 
   return (
-    <>
+    <S.Calendar>
       <div>Calendário</div>
-      <ul>
+      <CalendarGrid>
         {calendarDays.map((day) => (
-          <li key={day.dateString}>{day.dateString}</li>
+          <CalendarDay key={day.dateString} day={day}>
+            {day.dateString}
+          </CalendarDay>
         ))}
-      </ul>
-    </>
+      </CalendarGrid>
+    </S.Calendar>
   );
 }
