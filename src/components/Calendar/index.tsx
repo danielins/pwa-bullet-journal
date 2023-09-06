@@ -1,44 +1,19 @@
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import {
-  ICalendarDay,
-  createDaysForCurrentMonth,
-  createDaysForNextMonth,
-  createDaysForPreviousMonth,
-} from "src/helpers/calendar";
+
 import { CalendarGrid } from "./CalendarGrid";
 import { CalendarDay } from "./CalendarDay";
 
 import * as S from "./styles";
 import { CalendarWeekDays } from "./CalendarWeekDays";
 import { CalendarWeekDaysGrid } from "./CalendarGrid/styles";
+import { useCalendarDays } from "src/hooks/useCalendarDays";
 
 export default function Calendar() {
   // https://engineering.deptagency.com/how-to-build-a-full-page-calendar-with-react
 
-  const [calendarDays, setCalendarDays] = useState<ICalendarDay[]>([]);
-
-  useEffect(() => {
-    const currentYear = dayjs().year();
-    const currentMonth = dayjs().month() + 1;
-
-    const currentMonthDays = createDaysForCurrentMonth(
-      currentYear,
-      currentMonth
-    );
-
-    const calendarForCurrentMonth = [
-      ...createDaysForPreviousMonth(
-        currentYear,
-        currentMonth,
-        currentMonthDays
-      ),
-      ...currentMonthDays,
-      ...createDaysForNextMonth(currentYear, currentMonth, currentMonthDays),
-    ];
-
-    setCalendarDays(calendarForCurrentMonth);
-  }, []);
+  const [month, setMonth] = useState(7);
+  const [year, setYear] = useState(2023);
+  const calendarDays = useCalendarDays(month, year);
 
   return (
     <S.Calendar>
