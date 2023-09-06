@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const CalendarDayHeader = styled.div`
-  border-bottom: 1px solid lightgray;
-  padding-bottom: 5px;
-  margin-bottom: 5px;
+  border-bottom: ${({theme}) => `${theme.calendar.day.header.borderWidth} solid ${theme.calendar.day.header.borderColor}`};
+  margin-bottom: ${({theme}) => theme.calendar.day.header.marginBottom};
+  padding-bottom: ${({theme}) => theme.calendar.day.header.paddingBottom};
 `

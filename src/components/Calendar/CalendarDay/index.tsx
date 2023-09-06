@@ -11,8 +11,10 @@ export const CalendarDay: React.FC<any> = ({
   children,
   day,
 }: CalendarDayProps) => {
+  const { isCurrentMonth } = day;
+
   return (
-    <S.CalendarDay>
+    <S.CalendarDay isCurrentMonth={isCurrentMonth}>
       <CalendarDayHeader day={day} />
       {children}
     </S.CalendarDay>
