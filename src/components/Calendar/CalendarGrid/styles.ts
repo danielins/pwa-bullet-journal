@@ -10,3 +10,7 @@ export const CalendarGrid = styled.div`
   grid-column-gap: ${({theme}) => theme.calendar.grid.columnGap};
   grid-row-gap: ${({theme}) => theme.calendar.grid.rowGap};
 `
+
+export const CalendarWeekDaysGrid = styled(CalendarGrid)`
+  margin-bottom: ${({theme}) => theme.calendar.weekDays.marginBottom};
+`

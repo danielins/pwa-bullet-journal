@@ -67,6 +67,9 @@ const lightTheme = {
       borderColor: colors.brand[300],
       columnGap: measures.px[300],
       rowGap: measures.px[300],
+    },
+    weekDays: {
+      marginBottom: measures.px[200]
     }
   }
 }

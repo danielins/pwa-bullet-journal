@@ -10,6 +10,8 @@ import { CalendarGrid } from "./CalendarGrid";
 import { CalendarDay } from "./CalendarDay";
 
 import * as S from "./styles";
+import { CalendarWeekDays } from "./CalendarWeekDays";
+import { CalendarWeekDaysGrid } from "./CalendarGrid/styles";
 
 export default function Calendar() {
   // https://engineering.deptagency.com/how-to-build-a-full-page-calendar-with-react
@@ -41,6 +43,9 @@ export default function Calendar() {
   return (
     <S.Calendar>
       <div>Calendário</div>
+      <CalendarWeekDaysGrid>
+        <CalendarWeekDays />
+      </CalendarWeekDaysGrid>
       <CalendarGrid>
         {calendarDays.map((day) => (
           <CalendarDay key={day.dateString} day={day}>
