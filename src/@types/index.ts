@@ -13,6 +13,8 @@ export interface Track {
 }
 
 export type JournalState = {
+  month: number;
+  year: number;
   tasks: Task[];
   tracks: Track[];
 }
