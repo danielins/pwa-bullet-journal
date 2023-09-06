@@ -1,9 +1,12 @@
 import dayjs from 'dayjs'
 import weekday from 'dayjs/plugin/weekday'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
+import { range } from './array';
 
 dayjs.extend(weekday);
 dayjs.extend(weekOfYear);
+
+const YEAR_SELECTION_THRESHOLD: number = 4;
 
 export interface ICalendarDay {
   dateString: string;
@@ -11,6 +14,29 @@ export interface ICalendarDay {
   isCurrentMonth: boolean;
   isPreviousMonth?: boolean;
   isNextMonth?: boolean;
+}
+
+export interface IDateSelectOption {
+  label: string;
+  value: number;
+}
+
+export function getYearSelectOptions(year: number): IDateSelectOption[] {
+  return range(year - YEAR_SELECTION_THRESHOLD, year + YEAR_SELECTION_THRESHOLD).map(yearOption => {
+    return {
+      label: yearOption.toString(),
+      value: yearOption,
+    }
+  })
+}
+
+export function getMonthSelectOptions(): IDateSelectOption[] {
+  return range(1, 12).map(monthOption => {
+    return {
+      label: dayjs().month(monthOption - 1).format("MMMM"),
+      value: monthOption,
+    }
+  })
 }
 
 export function _getWeekDay(dateString: string): number {

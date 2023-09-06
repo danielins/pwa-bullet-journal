@@ -8,6 +8,7 @@ import { CalendarWeekDaysGrid } from "./CalendarGrid/styles";
 import { useCalendarDays } from "src/hooks/useCalendarDays";
 import dayjs from "dayjs";
 import { ICalendarDay } from "src/helpers/calendar";
+import { CalendarDatePicker } from "./CalendarDatePicker";
 
 export default function Calendar() {
   // https://engineering.deptagency.com/how-to-build-a-full-page-calendar-with-react
@@ -25,6 +26,7 @@ export default function Calendar() {
   return (
     <S.Calendar>
       <div>Calendário</div>
+      <CalendarDatePicker />
       <CalendarWeekDaysGrid />
       <CalendarGrid>
         {calendarDays.map((day) => (
