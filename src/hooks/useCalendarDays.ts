@@ -4,6 +4,8 @@ import { ICalendarDay, createDaysForCurrentMonth, createDaysForNextMonth, create
 function useCalendarDays(currentMonth: number, currentYear: number): ICalendarDay[] {
   const [calendarDays, setCalendarDays] = useState<ICalendarDay[]>([]);
 
+  console.log('using calendar days')
+
   useEffect(() => {
     const currentMonthDays = createDaysForCurrentMonth(
       currentYear,
@@ -21,7 +23,7 @@ function useCalendarDays(currentMonth: number, currentYear: number): ICalendarDa
     ];
 
     setCalendarDays(calendarForCurrentMonth);
-  }, []);
+  }, [currentMonth, currentYear]);
 
   return calendarDays
 }

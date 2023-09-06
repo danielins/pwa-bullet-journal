@@ -41,11 +41,6 @@ export function createDaysForPreviousMonth(year: number, month: number, currentM
   const visibleNumberOfDaysFromPreviousMonth = weekdayFirstDayOfMonth;
   const previousMonthLastMonday: number = dayjs(currentMonthDays[0].dateString).subtract(visibleNumberOfDaysFromPreviousMonth, 'day').date();
 
-  console.log('weekdayFirstDayOfMonth', weekdayFirstDayOfMonth)
-  console.log('previousMonth', previousMonth)
-  console.log('visibleNumberOfDaysFromPreviousMonth', visibleNumberOfDaysFromPreviousMonth)
-  console.log('previousMonthLastMonday', previousMonthLastMonday)
-
   return [...Array(visibleNumberOfDaysFromPreviousMonth)].map((_, index) => {
     return {
       dateString: dayjs(`${previousMonth.year()}-${previousMonth.month() + 1}-${previousMonthLastMonday + index}`).format('YYYY-MM-DD'),
